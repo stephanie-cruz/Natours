@@ -1,0 +1,129 @@
+.popup{
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba($color-black,.8);
+    z-index: 9999;
+
+    opacity: 0; // if we use display none we cannot animate it
+    visibility: hidden;
+    transition: all .3s;
+
+   @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)){
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba($color-black,.3);
+   }
+
+  
+
+    &__content{
+        @include absCenter;
+        width: 75%;
+        height: 50rem;
+        background-color: $color-white;
+        box-shadow: 0 2rem 4rem rgba($color-black,.2);
+        border-radius: 3px;
+
+        display: table;
+
+        //overflow: hidden;
+
+      //  opacity: 0;
+      transform: translate(-50%,-50%) scale(.25); // se tiene que repetir el translate porque no pueden haber dos transform
+        transition: all .5s .2s; // .2s delay
+
+        @media only screen and (max-width:900px){
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+       
+    }
+   
+
+    &__left{
+       // width: 100%;
+        height: 100%;
+       
+        @media only screen and (max-width:900px){
+            display: flex;
+            width: 100%;
+            
+        }
+       
+    }
+
+    &__right{
+        width: 66.66666%;
+        display: table-cell;
+        vertical-align: middle;
+        padding: 3rem 5rem;
+
+        @media only screen and (max-width:900px){
+            width: 100%;
+        }
+    }
+
+    &__img{
+        display: block;
+        width: 100%;
+        
+        @media only screen and (max-width:900px){
+            width: 50%;
+            margin: 0;
+        }
+    }
+
+    &__text{
+        font-size: 1.4rem;
+        margin-bottom: 4rem;
+
+        -moz-column-count: 2;
+        -moz-column-gap: 4rem; // it is for default 1em (in this case 14 px, bcs the element font size is 14px)
+        -moz-column-rule: 1px solid $color-grey-light-2;
+
+
+        column-count: 2;
+        column-gap: 4rem; // it is for default 1em (in this case 14 px, bcs the element font size is 14px)
+        column-rule: 1px solid $color-grey-light-2;
+
+        -moz-hyphens:auto;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+
+        hyphens: auto;
+    }
+
+
+//OPEN STATES
+    &:target{
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &:target &__content{
+        opacity: 1;
+        transform: translate(-50%,-50%) scale(1);
+    }
+
+    &__close{
+        &:link,&:visited{
+            color: $color-grey-dark;
+            position: absolute;
+            top:.5rem;
+            right: 2.5rem;
+            font-size: 3rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all .2s;
+        }
+
+        &:hover{
+            color:$color-primary-light;
+        }
+    }
+}

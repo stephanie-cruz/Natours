@@ -1,0 +1,88 @@
+.story{
+    width: 75%;
+    margin: 0 auto;
+    color: $color-black;
+    background-color: rgba($color-white,.6);
+    border-radius: 3px;
+    box-shadow: 0 3rem 6rem rgba($color-black,.2);
+    padding: 6rem;
+    padding-left: 9rem;
+    font-size: $default-font-size;
+
+    transform: skewX(-12deg);
+
+    @include respond(tab-port){
+        width: 100%;
+        padding: 4rem;
+        padding-left: 7rem;
+
+    }
+
+    @include respond(phone){
+        transform: skew(0);
+
+    }
+  /*  & > * {
+            // si lo hacemos asi se arregla todo menos la imagen, porque ya tiene un transform
+            // asi que hay que hacerlo en todos
+    }*/
+
+    &__shape{
+        width: 15rem;
+        height: 15rem;
+        float: left;   
+        transform: translateX(-3rem) skewX(12deg);
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+
+        @supports (clip-path: circle(50% at 50%  50%)) or (-webkit-clip-path: circle(50% at 50%  50%)){
+            border-radius: none;
+            -webkit-clip-path: circle(50% at 50%  50%);
+            clip-path: circle(50% at 50%  50%);
+            -webkit-shape-outside: circle(50% at 50%  50%);
+            shape-outside: circle(50% at 50%  50%); // para que funcione el elemento debe estar flotdo   
+        }
+
+        @include respond(phone){
+            transform: translateX(-3rem)  skew(0);
+            
+        }
+    }
+
+    &__image{
+        height: 100%;
+        transform: translateX(-4rem) scale(1.4);
+        backface-visibility: hidden; // ver
+        transition: all .5s;
+
+    }
+
+    &__text{
+        transform: skewX(12deg);
+    }
+
+    &__caption{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,20%);
+        color: $color-white;
+        font-size: 1.7rem;
+        text-transform: uppercase;
+        text-align: center;
+        opacity: 0;
+        transition: all .5s;
+        backface-visibility: hidden; // ver
+    }
+
+    &:hover &__caption{
+        opacity: 1;
+        transform: translate(-50%,-50%);
+    }
+
+    &:hover &__image{
+        transform: translateX(-4rem) scale(1);
+        filter: blur(3px) brightness(80%);
+    }
+}

@@ -1,0 +1,51 @@
+
+.row{
+    /* max-width: 100px; lo queremos en rem asi que dividimos entre 10*/
+     max-width: $grid-width;
+     margin: 0 auto; /* centrar un blocke dentro de otro*/
+      
+
+ 
+      &:not(:last-child){ // todos menos el ultimo hijo
+         margin-bottom: $gutter-vertical;
+
+         @include respond(tab-port){margin-bottom:$gutter-vertical-small};
+      }
+ 
+      @include respond(tab-port){
+          max-width: 50rem;
+          padding: 0 3rem;
+      }
+
+
+      @include clearfix ;
+ 
+      [class^="col-"]{ // selecciona todos los elementos en la cual la clase comience por col-
+         float: left;
+ 
+         &:not(:last-child){
+             margin-right: $gutter-horizontal;
+             @include respond(tab-port){ margin-right: 0; margin-bottom: $gutter-vertical-small;}
+         }
+
+         @include respond(tab-port){ width: 100% !important;}
+      }
+ 
+      .col-1-of-2{
+          width: calc((100% - #{$gutter-horizontal})/2);
+    
+      }
+ 
+      .col-1-of-3{
+        width: calc((100% - 2*#{$gutter-horizontal})/3);
+
+    }
+
+      .col-1-of-4{
+        width: calc((100% - 3*#{$gutter-horizontal})/4);
+
+     }
+ 
+    
+ };
+ 
